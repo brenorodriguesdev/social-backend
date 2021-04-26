@@ -6,7 +6,7 @@ export class AuthenticationService implements AuthenticationUseCase {
     constructor(private readonly encrypter: Encrypter) { }
 
     async auth(accessToken: string): Promise<any> {
-        const data = this.encrypter.encrypt(accessToken)
+        const data = await this.encrypter.encrypt(accessToken)
         if (!data) {
             return new UnauthorizedError('Esse token de acesso não é válido!')
         }
