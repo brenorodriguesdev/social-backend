@@ -3,7 +3,7 @@ import { CompositeValidator } from "../../../validation/validator/composite-vali
 import { EmailValidator } from "../../../validation/validator/email-validator";
 import { RequiredFieldValidator } from "../../../validation/validator/required-field-validator";
 
-export const createUserValidation = (): Validator => {
+export const createUserValidationFactory = (): Validator => {
     const requiredFields = ['name', 'email', 'password']
     const validators = []
     for (let requiredField of requiredFields) {
