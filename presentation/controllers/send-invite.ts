@@ -3,6 +3,7 @@ import { Validator } from "../../validation/contracts/validator";
 import { Controller } from "../contracts/controller";
 import { HttpRequest, HttpResponse } from "../contracts/http";
 import { badRequest, created, serverError } from "../contracts/http-helper";
+import { NotFoundError } from "../errors";
 
 export class SendInviteController implements Controller {
 
@@ -14,10 +15,13 @@ export class SendInviteController implements Controller {
                 return badRequest(error)
             }
             const { id, idGuest } = httpRequest.body
-            this.sendInviteUseCase.send({
+            const result = await this.sendInviteUseCase.send({
                 id,
                 idGuest,
             })
+            if (result instanceof NotFoundError) {
+                return badRequest(result)
+            }
             return created()
         } catch (error) {
             return serverError()
