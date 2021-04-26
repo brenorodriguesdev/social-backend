@@ -9,12 +9,12 @@ export class AcceptInviteController implements Controller {
     constructor(private readonly validator: Validator, private readonly acceptInviteUseCase: AcceptInviteUseCase) { }
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            const { id_convite } = httpRequest.body
+            const { idConvite } = httpRequest.body
             const error = this.validator.validate(httpRequest.body)
             if (error) {
                 return badRequest(error)
             }
-            const result = await this.acceptInviteUseCase.accept(id_convite)
+            const result = await this.acceptInviteUseCase.accept(idConvite)
             if (result instanceof NotFoundError || result instanceof AlreadyExistError) {
                 return badRequest(result)
             }
