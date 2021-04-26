@@ -4,7 +4,7 @@ import { RequiredFieldValidator } from "../../../validation/validator/required-f
 
 
 export const makeSendInviteValidation = (): Validator => {
-    const requiredFields = ['id', 'id_guest']
+    const requiredFields = ['id', 'idGuest']
     const validators = []
     for (let requiredField of requiredFields) {
         validators.push(new RequiredFieldValidator(requiredField))
