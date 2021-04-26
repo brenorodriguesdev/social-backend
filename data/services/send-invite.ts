@@ -4,7 +4,7 @@ import { NotFoundError } from "../../presentation/errors/not-found-error";
 import { UserRepository, InviteRepository, SocketSend } from "../contracts";
 
 export class SendInviteService implements SendInviteUseCase {
-    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository, private readonly socketSend: SocketSend) { }
+    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository/*, private readonly socketSend: SocketSend*/) { }
     async send(invite: SendInviteModel): Promise<void | Error> {
         const user = this.userRepository.findById(invite.id)
         if (!user) {
@@ -19,8 +19,8 @@ export class SendInviteService implements SendInviteUseCase {
             id_guest: invite.idGuest,
             view: false
         })
-        await this.socketSend.send(invite.idGuest, 'invite', {
-            invite: newInvite
-        })
+        // await this.socketSend.send(invite.idGuest, 'invite', {
+        //     invite: newInvite
+        // })
     }
 }
