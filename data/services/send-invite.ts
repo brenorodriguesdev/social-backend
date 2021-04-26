@@ -1,9 +1,9 @@
 import { SendInviteModel } from "../../domain/models/send-invite";
 import { SendInviteUseCase } from "../../domain/useCases/send-invite";
-import { UserRepository, InviteRepository } from "../contracts";
+import { UserRepository, InviteRepository, SocketSend } from "../contracts";
 
 export class SendInviteService implements SendInviteUseCase {
-    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository) { }
+    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository, private readonly socketSend: SocketSend) { }
     async send(invite: SendInviteModel): Promise<void> {
         const user = this.userRepository.findById(invite.id)
         if (!user) {
@@ -13,10 +13,13 @@ export class SendInviteService implements SendInviteUseCase {
         if (!userGuest) {
             throw new Error('O usuário convidado não existe em nosso banco de dados!')
         }
-        await this.inviteRepository.create({
+        const newInvite = await this.inviteRepository.create({
             id_user: invite.id,
             id_guest: invite.idGuest,
             view: false
+        })
+        await this.socketSend.send(invite.idGuest, 'invite', {
+            invite: newInvite
         })
     }
 }
