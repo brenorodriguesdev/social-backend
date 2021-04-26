@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
     "validator": "^13.6.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.1",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/validator": "^13.1.3"
   }
 }
