@@ -7,5 +7,5 @@ export const database = pgp({
     password: '1',
     host: 'localhost',
     port: 5432,
-    database: 'blog'
+    database: 'social'
 });
