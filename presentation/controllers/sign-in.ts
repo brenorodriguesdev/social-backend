@@ -3,6 +3,7 @@ import { Validator } from "../../validation/contracts/validator";
 import { Controller } from "../contracts/controller";
 import { HttpRequest, HttpResponse } from "../contracts/http";
 import { badRequest, ok, serverError } from "../contracts/http-helper";
+import { UnauthorizedError } from "../errors";
 
 export class SignInController implements Controller {
     constructor(private readonly validator: Validator, private readonly signInUseCase: SignInUseCase) { }
@@ -17,6 +18,9 @@ export class SignInController implements Controller {
                 email,
                 password
             })
+            if (accessToken instanceof UnauthorizedError) {
+                return badRequest(accessToken)
+            }
             return ok({ accessToken })
         } catch (error) {
             return serverError()

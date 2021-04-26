@@ -1,4 +1,5 @@
 import { AuthenticationUseCase } from "../../domain/useCases/authentication";
+import { UnauthorizedError } from "../../presentation/errors/unauthorized-error";
 import { Encrypter } from "../contracts/encrypter";
 
 export class AuthenticationService implements AuthenticationUseCase {
@@ -7,7 +8,7 @@ export class AuthenticationService implements AuthenticationUseCase {
     async auth(accessToken: string): Promise<any> {
         const data = this.encrypter.encrypt(accessToken)
         if (!data) {
-            throw new Error('Esse token de acesso não é válido!')
+            return new UnauthorizedError('Esse token de acesso não é válido!')
         }
         return data
     }

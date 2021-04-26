@@ -10,6 +10,16 @@ export const badRequest = (error: Error): HttpResponse => ({
     statusCode: 400
 })
 
+export const unauthorized = (error: Error): HttpResponse => ({
+    data: error,
+    statusCode: 401
+})
+
+export const notFound = (error: Error): HttpResponse => ({
+    data: error,
+    statusCode: 404
+})
+
 export const created = (): HttpResponse => ({
     statusCode: 201
 })
