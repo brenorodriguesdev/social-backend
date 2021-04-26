@@ -12,7 +12,7 @@ export class SignInService implements SignInUseCase {
         if (!alreadyUser) {
             return new UnauthorizedError('Esse email não está cadastrado em nosso banco de dados!')
         }
-        const isValid = this.hasher.compare(signInModel.password, alreadyUser.password)
+        const isValid = await this.hasher.compare(signInModel.password, alreadyUser.password)
         if (!isValid) {
             return new UnauthorizedError('Credenciais Inválidas!')
         }
