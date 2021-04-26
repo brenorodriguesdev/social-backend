@@ -3,7 +3,7 @@ import { Validator } from "../../validation/contracts/validator";
 import { Controller } from "../contracts/controller";
 import { HttpRequest, HttpResponse } from "../contracts/http";
 import { badRequest, created, serverError } from "../contracts/http-helper";
-import { NotFoundError } from "../errors";
+import { NotFoundError, UnauthorizedError } from "../errors";
 
 export class SendInviteController implements Controller {
 
@@ -19,7 +19,7 @@ export class SendInviteController implements Controller {
                 id,
                 idGuest,
             })
-            if (result instanceof NotFoundError) {
+            if (result instanceof NotFoundError || result instanceof UnauthorizedError) {
                 return badRequest(result)
             }
             return created()
