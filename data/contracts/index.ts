@@ -1,5 +1,5 @@
 export * from './crypter'
 export * from './encrypter'
-export * from './inviteRepository'
-export * from './userRepository'
+export * from './invite-repository'
+export * from './user-repository'
 export * from './socket-sender'

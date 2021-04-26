@@ -1,5 +1,5 @@
 import { database } from "../main/config/database";
-import { UserRepository } from "../data/contracts/userRepository";
+import { UserRepository } from "../data/contracts/user-repository";
 import { User } from "../data/models/user";
 
 export class UserRepositoryPostgres implements UserRepository {

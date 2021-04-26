@@ -2,7 +2,7 @@ import { CreateUserModel } from "../../domain/models/create-user";
 import { CreateUserUseCase } from "../../domain/useCases/create-user";
 import { AlreadyExistError } from "../../presentation/errors/already-exist-error";
 import { Hasher } from "../contracts/hasher";
-import { UserRepository } from "../contracts/userRepository";
+import { UserRepository } from "../contracts/user-repository";
 
 export class CreateUserService implements CreateUserUseCase {
 

@@ -1,6 +1,6 @@
 import { SignInModel } from "../../domain/models/sign-in";
 import { SignInUseCase } from "../../domain/useCases/sign-in";
-import { UserRepository } from "../contracts/userRepository";
+import { UserRepository } from "../contracts/user-repository";
 import { Hasher } from "../contracts/hasher";
 import { Crypter } from "../contracts/crypter";
 import { UnauthorizedError } from "../../presentation/errors/unauthorized-error";

@@ -1,7 +1,7 @@
 
 import { SendInviteService } from "../../../data/services/send-invite";
-import { InviteRepositoryPostgres } from "../../../infra/inviteRepository";
-import { UserRepositoryPostgres } from "../../../infra/userRepository";
+import { InviteRepositoryPostgres } from "../../../infra/invite-repository";
+import { UserRepositoryPostgres } from "../../../infra/user-repository";
 import { SendInviteController } from "../../../presentation/controllers/send-invite";
 import { makeSendInviteValidation } from "../validations/send-invite-validation-factory";
 

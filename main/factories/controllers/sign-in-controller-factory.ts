@@ -1,7 +1,7 @@
 import { SignInService } from "../../../data/services/sign-in";
 import { Bcrypt } from "../../../infra/bcrypt";
 import { JsonWebToken } from "../../../infra/jsonwebtoken";
-import { UserRepositoryPostgres } from "../../../infra/userRepository";
+import { UserRepositoryPostgres } from "../../../infra/user-repository";
 import { SignInController } from "../../../presentation/controllers/sign-in";
 import { makeSignInValidation } from "../validations/sign-in-validation-factory";
 

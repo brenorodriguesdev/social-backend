@@ -2,9 +2,10 @@ import { SendInviteModel } from "../../domain/models/send-invite";
 import { SendInviteUseCase } from "../../domain/useCases/send-invite";
 import { AlreadyExistError, NotFoundError, UnauthorizedError } from "../../presentation/errors";
 import { UserRepository, InviteRepository, SocketSend } from "../contracts";
+import { FriendListRepository } from "../contracts/friend-list-repository";
 
 export class SendInviteService implements SendInviteUseCase {
-    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository/*, private readonly socketSend: SocketSend*/) { }
+    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository, private readonly friendListRepository: FriendListRepository/*, private readonly socketSend: SocketSend*/) { }
     async send(invite: SendInviteModel): Promise<void | Error> {
         if (invite.id === invite.idGuest) {
             return new UnauthorizedError('Você não pode enviar um convite para si mesmo!')
@@ -12,6 +13,10 @@ export class SendInviteService implements SendInviteUseCase {
         const alreadyInvite = await this.inviteRepository.findByGuest(invite.idGuest)
         if (alreadyInvite) {
             return new AlreadyExistError('Você já enviou um convite para esssa pessoa!')
+        }
+        const alreadyFriendList = await this.friendListRepository.findByUsers(invite.id, invite.idGuest)
+        if (alreadyFriendList) {
+            return new AlreadyExistError('Você já é amigo dessa pessoa!')
         }
         const user = this.userRepository.findById(invite.id)
         if (!user) {
