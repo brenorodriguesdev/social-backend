@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse } from "./http";
+import { HttpResponse } from "./http";
 
 export const serverError = (): HttpResponse => ({
     data: new Error('Erro Interno no Servidor'),
