@@ -4,7 +4,7 @@ import { AlreadyExistError, NotFoundError, UnauthorizedError } from "../../prese
 import { UserRepository, InviteRepository, SocketSend } from "../contracts";
 
 export class SendInviteService implements SendInviteUseCase {
-    constructor(private readonly inviteRepository: InviteRepository, private readonly userRepository: UserRepository/*, private readonly socketSend: SocketSend*/) { }
+    constructor(private readonly userRepository: UserRepository, private readonly inviteRepository: InviteRepository/*, private readonly socketSend: SocketSend*/) { }
     async send(invite: SendInviteModel): Promise<void | Error> {
         if (invite.id === invite.idGuest) {
             return new UnauthorizedError('Você não pode enviar um convite para si mesmo!')
