@@ -5,7 +5,7 @@ import { Bcrypt } from "../../../infra/bcrypt";
 import { UserRepositoryPostgres } from "../../../infra/userRepository";
 
 
-export const makeSignInController = (): CreateUserController => {
+export const makeCreateUserController = (): CreateUserController => {
     const userRepositoryPostgres = new UserRepositoryPostgres()
     const bcrypt = new Bcrypt(8)
     const createUserService = new CreateUserService(bcrypt, userRepositoryPostgres)
