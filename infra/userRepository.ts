@@ -7,6 +7,10 @@ export class UserRepositoryPostgres implements UserRepository {
         return database.oneOrNone('select * from user_account where email = $1', [email]);
     }
 
+    async findById(id: number): Promise<User> {
+        return database.oneOrNone('select * from user_account where id = $1', [id]);
+    }
+
     async create(user: User): Promise<void> {
         database.none('insert into user_account (name, email, password) values ($1, $2, $3)', [user.name, user.email, user.password]);
     }
