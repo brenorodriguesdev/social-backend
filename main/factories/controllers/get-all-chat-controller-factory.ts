@@ -1,12 +1,11 @@
-import { GetChatService } from "../../../data/services/get-chat";
+import { GetAllChatService } from "../../../data/services/get-all-chat";
 import { ChatRepositoryPostgres } from "../../../infra/chat-repository";
 import { MessageRepositoryPostgres } from "../../../infra/message-repository";
-import { GetChatController } from "../../../presentation/controllers/get-chat";
-import { makeGetChatValidation } from "../validations/get-chat-validation-factory";
+import { GetAllChatController } from "../../../presentation/controllers/get-all-chat";
 
-export const makeGetChatController = (): GetChatController => {
+export const makeGetAllChatController = (): GetAllChatController => {
     const chatRepositoryPostgres = new ChatRepositoryPostgres()
     const messageRepositoryPostgres = new MessageRepositoryPostgres()
-    const getChatService = new GetChatService(chatRepositoryPostgres, messageRepositoryPostgres)
-    return new GetChatController(makeGetChatValidation(), getChatService)
+    const getAllChatService = new GetAllChatService(chatRepositoryPostgres, messageRepositoryPostgres)
+    return new GetAllChatController(getAllChatService)
 }
