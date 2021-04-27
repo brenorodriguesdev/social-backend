@@ -21,7 +21,9 @@ export class SendMessageService implements SendMessageUseCase {
         }
         await this.messageRepository.create({
             id_chat: alreadyChat.id,
-            message: sendMessageModel.message
+            message: sendMessageModel.message,
+            id_sender: sendMessageModel.idSender,
+            id_receiver: sendMessageModel.idReceiver
         })
     }
 }
