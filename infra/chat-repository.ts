@@ -9,6 +9,9 @@ export class ChatRepositoryPostgres implements ChatRepository {
     async findByUsers(idSender: number, idReceiver: number): Promise<Chat> {
         return await database.oneOrNone('select * from chat where id_sender = $1 and id_receiver = $2', [idSender, idReceiver]);
     }
+    async findByUser(idUser: number): Promise<Chat> {
+        return await database.oneOrNone('select * from chat where id_sender = $1 or id_receiver = $2', [idUser, idUser]);
+    }
     async findAllChat(idUser: number): Promise<Chat[]> {
         const chatList: Chat[] = await database.manyOrNone('select * from chat where id_sender = $1 or id_receiver = $2 order by id desc', [idUser, idUser]);
         return await Promise.all(chatList.map(async (chat): Promise<Chat> => {

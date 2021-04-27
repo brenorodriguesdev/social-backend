@@ -1,5 +1,5 @@
-import { Chat } from "../../data/models/chat";
+import { ChatMessage } from "../models/chatMessage";
 
 export interface GetChatUseCase {
-    get(idUser: number, idChat: number): Promise<Chat>
+    get(idUser: number, idChat: number): Promise<ChatMessage>
 }
