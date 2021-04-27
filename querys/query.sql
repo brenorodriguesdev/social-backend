@@ -31,4 +31,5 @@ create table chat
 create table message
 (id serial primary key, 
  id_chat serial NOT NULl,
+ message text NOT NULL,
  FOREIGN KEY (id_chat) REFERENCES chat(id));
