@@ -7,6 +7,6 @@ import { auth } from "../middlewares/auth";
 
 export default (router: Router): void => {
     router.get('/getAllChat', auth, adaptRouter(makeGetAllChatController()))
-    router.get('/getChat', auth, adaptRouter(makeGetChatController()))
+    router.get('/getChat/:idChat', auth, adaptRouter(makeGetChatController()))
 
 }
