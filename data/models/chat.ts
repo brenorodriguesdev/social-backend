@@ -1,7 +1,7 @@
 export interface Chat {
     id?: number
     id_sender: number
-    nameSender: string
+    nameSender?: string
     id_receiver: number
-    nameReceiver: string
+    nameReceiver?: string
 }
