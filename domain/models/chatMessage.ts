@@ -1,4 +1,4 @@
 export type ChatMessage = {
-    id_sender: string
-    text: string
+    id_sender: number
+    message: string
 }
