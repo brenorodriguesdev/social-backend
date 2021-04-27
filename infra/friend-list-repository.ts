@@ -9,4 +9,7 @@ export class FriendListRepositoryPostgres implements FriendListRepository {
     async findByUsers(idUser: number, idGuest: number): Promise<FriendList> {
         return await database.oneOrNone('select * from friend_list where id_user = $1 and id_guest = $2', [idUser, idGuest]);
     }
+    async areFriends(idUser: number, idGuest: number): Promise<FriendList> {
+        return await database.oneOrNone('select * from friend_list where (id_user = $1 and id_guest = $2 or id_guest = $1 and id_user = $2) ', [idUser, idGuest, idGuest, idUser]);
+    }
 }
