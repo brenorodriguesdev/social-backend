@@ -10,4 +10,8 @@ export class MessageRepositoryPostgres implements MessageRepository {
     async lastMessage(idChat: number): Promise<Message> {
         return await database.oneOrNone('select * from message where id_chat = $1 order by id desc limit 1', [idChat]);
     }
+
+    async findAllMessage(idChat: number): Promise<Message[]> {
+        return await database.manyOrNone('select * from message where id_chat = $1 order by id desc', [idChat]);
+    }
 }
