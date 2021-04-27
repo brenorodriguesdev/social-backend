@@ -6,4 +6,8 @@ export class MessageRepositoryPostgres implements MessageRepository {
     async create(message: Message): Promise<void> {
         await database.none('insert into message (id_chat, message) values ($1, $2)', [message.id_chat, message.message]);
     } 
+
+    async lastMessage(idChat: number): Promise<Message> {
+        return await database.oneOrNone('select * from message where id_chat = $1 order by id desc', [idChat]);
+    }
 }
