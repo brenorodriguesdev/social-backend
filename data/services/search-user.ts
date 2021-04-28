@@ -4,8 +4,8 @@ import { UserRepository } from "../contracts";
 
 export class SearchUserService implements SearchUserUseCase {
     constructor(private readonly userRepository: UserRepository) { }
-    async search(user: string): Promise<UserModel[]> {
-        const users = await this.userRepository.filter(user)
+    async search(id: number, user: string): Promise<UserModel[]> {
+        const users = await this.userRepository.filter(id, user)
         return users.map(user => {
             return {
                 id: user.id,
