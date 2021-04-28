@@ -6,5 +6,5 @@ import { auth } from "../middlewares/auth";
 
 
 export default (router: Router): void => {
-    router.get('/searchUser/:user', auth, adaptRouter(makeSearchUserController()))
+    router.get('/searchUser?:user', auth, adaptRouter(makeSearchUserController()))
 }

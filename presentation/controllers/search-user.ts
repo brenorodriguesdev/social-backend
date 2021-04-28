@@ -8,12 +8,12 @@ export class SearchUserController implements Controller {
     constructor(private readonly validator: Validator, private readonly searchUserUseCase: SearchUserUseCase) { }
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            const error = this.validator.validate(httpRequest.params)
+            const error = this.validator.validate(httpRequest.query)
             if (error) {
                 return badRequest(error)
             }
             const { id } = httpRequest.body
-            const { user } = httpRequest.params
+            const { user } = httpRequest.query
             const users = await this.searchUserUseCase.search(id, user)
             return ok(users)
         } catch (error) {

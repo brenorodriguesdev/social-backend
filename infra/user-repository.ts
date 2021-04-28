@@ -1,10 +1,12 @@
 import { database } from "../main/config/database";
 import { UserRepository } from "../data/contracts/user-repository";
 import { User } from "../data/models/user";
+import pgPromise from "pg-promise";
 
 export class UserRepositoryPostgres implements UserRepository {
     async filter(id: number, user: string): Promise<User[]> {
-        return await database.manyOrNone("select id, name from user_account where LOWER(name) like LOWER('%$1:value%') and id <> $2", [user, id]);
+        const users = await database.manyOrNone('select id, name from user_account where lower(name) like lower($1)', [`%${user}%`]);
+        return users
     }
 
     async findByEmail(email: string): Promise<User> {
