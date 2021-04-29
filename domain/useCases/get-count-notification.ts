@@ -1,3 +1,3 @@
 export interface GetCountNotificationUseCase {
-    get(idUser: number): Promise<void>
+    get(idUser: number): Promise<number>
 }
