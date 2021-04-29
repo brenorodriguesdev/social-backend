@@ -13,7 +13,7 @@ export class AcceptInviteService implements AcceptInviteUseCase {
         const { id_user, id_guest } = alreadyInvite
 
         const alreadyFriendList = await this.friendListRepository.findByUsers(id_user, id_guest)
-        
+
         if (alreadyFriendList) {
             return new AlreadyExistError('Você já é amigo dessa pessoa!')
         }
@@ -22,5 +22,7 @@ export class AcceptInviteService implements AcceptInviteUseCase {
             id_user,
             id_guest
         })
+
+        await this.inviteRepository.deleteById(id)
     }
 }
