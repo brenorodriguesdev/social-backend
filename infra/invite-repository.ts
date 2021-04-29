@@ -11,6 +11,10 @@ export class InviteRepositoryPostgres implements InviteRepository {
         return await database.oneOrNone('select * from user_invite where id = $1', [id]);
     }
 
+    async deleteById(id: number): Promise<void> {
+        await database.none('delete from user_invite where id = $1', [id]);
+    }
+
     async findByUsers(idUser: number, idGuest: number): Promise<Invite> {
         return await database.oneOrNone('select * from user_invite where id_user = $1 and id_guest = $1', [idUser, idGuest]);
     }
