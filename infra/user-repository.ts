@@ -5,7 +5,7 @@ import pgPromise from "pg-promise";
 
 export class UserRepositoryPostgres implements UserRepository {
     async filter(id: number, user: string): Promise<User[]> {
-        const users = await database.manyOrNone('select id, name from user_account where lower(name) like lower($1)', [`%${user}%`]);
+        const users = await database.manyOrNone('select id, name from user_account where lower(name) like lower($1) and id <> $2', [`%${user}%`, id]);
         return users
     }
 
