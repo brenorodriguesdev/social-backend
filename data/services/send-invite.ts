@@ -10,7 +10,7 @@ export class SendInviteService implements SendInviteUseCase {
         if (invite.id === invite.idGuest) {
             return new UnauthorizedError('Você não pode enviar um convite para si mesmo!')
         }
-        const alreadyInvite = await this.inviteRepository.findByGuest(invite.idGuest)
+        const alreadyInvite = await this.inviteRepository.findByUsers(invite.id, invite.idGuest)
         if (alreadyInvite) {
             return new AlreadyExistError('Você já enviou um convite para esssa pessoa!')
         }
