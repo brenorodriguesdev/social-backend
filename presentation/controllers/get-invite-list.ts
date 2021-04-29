@@ -8,7 +8,7 @@ export class GetInviteListController implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
             const { id } = httpRequest.body
-            const invitesModel = this.getInviteListUseCase.get(id)
+            const invitesModel = await this.getInviteListUseCase.get(id)
             return ok(invitesModel)
         } catch (error) {
             return serverError()
