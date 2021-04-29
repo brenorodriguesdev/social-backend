@@ -1,3 +1,5 @@
+import { UserModel } from "../models/user";
+
 export interface GetFriendListUseCase {
-    get(idUser): number
+    get(idUser: number) :Promise<UserModel[]> 
 }
