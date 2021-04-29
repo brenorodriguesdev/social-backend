@@ -1,7 +1,6 @@
 import { database } from "../main/config/database";
 import { UserRepository } from "../data/contracts/user-repository";
 import { User } from "../data/models/user";
-import pgPromise from "pg-promise";
 
 export class UserRepositoryPostgres implements UserRepository {
     async filter(id: number, user: string): Promise<User[]> {
