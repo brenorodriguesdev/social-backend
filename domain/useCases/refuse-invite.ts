@@ -1,3 +1,3 @@
 export interface RefuseInviteUseCase {
-    refuse(id: number): Promise<void>
+    refuse(id: number): Promise<void | Error>
 }
