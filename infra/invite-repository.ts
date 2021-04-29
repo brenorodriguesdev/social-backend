@@ -20,7 +20,7 @@ export class InviteRepositoryPostgres implements InviteRepository {
     }
 
     async findByGuest(idGuest: number): Promise<Invite[]> {
-        return await database.manyOrNone('select i.id, u.name from user_invite i, user_account u where i.id_guest = $1 and i.id_guest = u.id', [idGuest]);
+        return await database.manyOrNone('select i.id, u.name from user_invite i, user_account u where i.id_guest = $1 and i.id_user = u.id', [idGuest]);
     }
 
 }
