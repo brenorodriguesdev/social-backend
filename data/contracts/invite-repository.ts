@@ -7,4 +7,5 @@ export interface InviteRepository {
     findByUsers(idUser: number, idGuest: number): Promise<Invite>
     findByGuest(idUser: number): Promise<Invite[]>
     count(idUser: number): Promise<number>
+    setViewByGuest(idUser: number): Promise<void>
 }
