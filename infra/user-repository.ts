@@ -9,7 +9,7 @@ export class UserRepositoryPostgres implements UserRepository {
     }
 
     async findByEmail(email: string): Promise<User> {
-        return await database.oneOrNone('select * from user_account where email = $1', [email]);
+        return await database.oneOrNone('select * from user_account where lower(email) = lower($1)', [email]);
     }
 
     async findById(id: number): Promise<User> {
