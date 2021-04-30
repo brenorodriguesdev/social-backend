@@ -15,18 +15,23 @@ export class InviteRepositoryPostgres implements InviteRepository {
         await database.none('delete from user_invite where id = $1', [id]);
     }
 
+
     async findByUsers(idUser: number, idGuest: number): Promise<Invite> {
         return await database.oneOrNone('select * from user_invite where id_user = $1 and id_guest = $1', [idUser, idGuest]);
     }
 
     async count(idUser: number): Promise<number> {
-        const data =  await database.oneOrNone('select count(id) from user_invite where id_guest = $1 and view = false', [idUser]);
+        const data = await database.oneOrNone('select count(id) from user_invite where id_guest = $1 and view = false', [idUser]);
         return data.count
     }
 
     async findByGuest(idGuest: number): Promise<Invite[]> {
         return await database.manyOrNone('select i.id, u.name from user_invite i, user_account u where i.id_guest = $1 and i.id_user = u.id', [idGuest]);
     }
-    
+
+
+    async setViewByGuest(idUser: number): Promise<void> {
+        await database.none('update user_invite set view = true where id_guest = $1 and view = false', [idUser]);
+    }
 
 }
