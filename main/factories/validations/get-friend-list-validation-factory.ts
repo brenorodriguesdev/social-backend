@@ -4,7 +4,7 @@ import { RequiredFieldValidator } from "../../../validation/validator/required-f
 
 
 export const makeGetFriendListValidation = (): Validator => {
-    const requiredFields = ['idUser']
+    const requiredFields = []
     const validators = []
     for (let requiredField of requiredFields) {
         validators.push(new RequiredFieldValidator(requiredField))

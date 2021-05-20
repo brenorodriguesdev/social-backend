@@ -12,8 +12,9 @@ export class GetFriendListController implements Controller {
             if (error) {
                 return badRequest(error)
             }
+            const { id } = httpRequest.body
             const { idUser } = httpRequest.query
-            const users = await this.getFriendListUseCase.get(idUser)
+            const users = await this.getFriendListUseCase.get(idUser > 0 ? idUser : id)
             return ok(users)
         } catch (error) {
             return serverError()
